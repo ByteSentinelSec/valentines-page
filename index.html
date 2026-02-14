@@ -115,7 +115,8 @@ function showNextMessage() {
 typeMessage(titleEl, messages[0])
 typeMessage(messageEl, messages[0])
 
-setInterval(showNextMessage, 6000)
+// Κάθε μήνυμα μένει 10 δευτερόλεπτα
+setInterval(showNextMessage, 10000)
 
 function createHeart() {
   const heart = document.createElement('div')
@@ -131,6 +132,7 @@ function createHeart() {
   setTimeout(()=>heart.remove(),9000)
 }
 
+// Καρδιές με τυχαία κενά για πιο φυσική εμφάνιση
 setInterval(()=>{
   if(Math.random() > 0.2) createHeart()
 }, 250)
