@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Καθε Στιγμη Μαζι Σου</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #ffe6f0;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  color: #d6336c;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  background: #fff0f5;
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  max-width: 700px;
+  width: 90%;
+  position: relative;
+  z-index: 1;
+}
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  min-height: 50px;
+  transition: opacity 0.5s ease;
+  line-height: 1.4em;
+}
+p {
+  font-size: 1.2em;
+  margin: 10px 0;
+  line-height: 1.5em;
+  transition: opacity 0.5s ease;
+}
+.heart {
+  position: absolute;
+  user-select: none;
+  z-index: 0;
+  animation-name: fall;
+  animation-timing-function: linear;
+}
+@keyframes fall {
+  0% { transform: translateY(-50px); opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1 id="title">Καθε Στιγμη Μαζι Σου</h1>
+<p id="message">Καθε στιγμη μαζι σου ειναι η πιο ομορφη στιγμη της ζωης μου</p>
+</div>
+
+<script>
+const messages = [
+"Καθε στιγμη μαζι σου ειναι η πιο ομορφη στιγμη της ζωης μου",
+"Η αγαπη σου γεμιζει την καρδια μου με φως και χαρα",
+"Μαζι σου νιωθω πληρης και ευτυχισμενος",
+"Δεν υπαρχει τιποτα πιο ομορφο απο το να σε σκεφτομαι",
+"Η καρδια μου ανηκει σε εσενα για παντα",
+"Ειμαι παντα διπλα σου, οτι κι αν συμβει",
+"Σ αγαπω περισσοτερο καθε μερα",
+"Καθε σου χαμογελο φωτιζει την ψυχη μου",
+"Εισαι ο λογος που ξυπναω με χαμογελο",
+"Η αγαπη μας ειναι το πιο ομορφο ταξιδι",
+"Θελω να μοιραζομαι καθε στιγμη της ζωης μου μαζι σου",
+"Με κανεις να πιστευω στα θαυματα",
+"Σου υποσχομαι παντα να σε στηριζω",
+"Η καρδια μου ειναι δικη σου για παντα"
+];
+
+let index = 0
+const messageEl = document.getElementById('message')
+const titleEl = document.getElementById('title')
+
+function showNextMessage() {
+  index++
+  if(index >= messages.length) index = 0
+  messageEl.style.opacity = 0
+  titleEl.style.opacity = 0
+  setTimeout(() => {
+    messageEl.innerText = messages[index]
+    titleEl.innerText = messages[index]
+    messageEl.style.opacity = 1
+    titleEl.style.opacity = 1
+  }, 500)
+}
+
+setInterval(showNextMessage, 4000)
+
+function createHeart() {
+  const heart = document.createElement('div')
+  heart.classList.add('heart')
+  heart.innerText = "❤️"
+  const colors = ["#ff4d6d", "#ff99cc", "#ff66b2", "#ff80aa"]
+  heart.style.color = colors[Math.floor(Math.random() * colors.length)]
+  heart.style.left = Math.random() * window.innerWidth + 'px'
+  heart.style.fontSize = (15 + Math.random() * 25) + 'px'
+  heart.style.animationDuration = (4 + Math.random() * 4) + 's'
+  heart.style.top = "-50px"
+  document.body.appendChild(heart)
+  setTimeout(() => heart.remove(), 9000)
+}
+
+setInterval(createHeart, 200)
+</script>
+
+</body>
+</html>
