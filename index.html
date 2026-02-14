@@ -20,7 +20,7 @@ body {
 }
 .container {
   background: #fff0f5;
-  padding: 40px;
+  padding: 30px 20px;
   border-radius: 25px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.2);
   max-width: 700px;
@@ -31,17 +31,16 @@ body {
 h1 {
   font-size: 2em;
   margin-bottom: 20px;
-  min-height: 50px;
+  min-height: 60px;
   opacity: 0;
-  transition: opacity 0.5s ease;
   line-height: 1.4em;
 }
 p {
   font-size: 1.2em;
   margin: 10px 0;
-  line-height: 1.5em;
+  min-height: 40px;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  line-height: 1.5em;
 }
 .heart {
   position: absolute;
@@ -53,6 +52,14 @@ p {
 @keyframes fall {
   0% { transform: translateY(-50px); opacity: 1; }
   100% { transform: translateY(110vh); opacity: 0; }
+}
+@media(max-width: 768px) {
+  h1 { font-size: 1.6em; }
+  p { font-size: 1em; }
+}
+@media(max-width: 480px) {
+  h1 { font-size: 1.4em; }
+  p { font-size: 0.9em; }
 }
 </style>
 </head>
@@ -119,17 +126,20 @@ function createHeart() {
   const heart = document.createElement('div')
   heart.classList.add('heart')
   heart.innerText = "❤️"
-  const colors = ["#ff4d6d", "#ff99cc", "#ff66b2", "#ff80aa"]
-  heart.style.color = colors[Math.floor(Math.random() * colors.length)]
+  const colors = ["#ff4d6d","#ff99cc","#ff66b2","#ff80aa"]
+  heart.style.color = colors[Math.floor(Math.random()*colors.length)]
   heart.style.left = Math.random() * window.innerWidth + 'px'
-  heart.style.fontSize = (15 + Math.random() * 25) + 'px'
-  heart.style.animationDuration = (4 + Math.random() * 4) + 's'
+  heart.style.fontSize = (15 + Math.random()*25) + 'px'
+  heart.style.animationDuration = (4 + Math.random()*4) + 's'
   heart.style.top = "-50px"
   document.body.appendChild(heart)
-  setTimeout(() => heart.remove(), 9000)
+  setTimeout(()=>heart.remove(),9000)
 }
 
-setInterval(createHeart, 200)
+// δημιουργούμε καρδιές με κενά για πιο φυσικό αποτέλεσμα
+setInterval(()=>{
+  if(Math.random() > 0.2) createHeart()
+}, 250)
 </script>
 
 </body>
