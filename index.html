@@ -28,19 +28,21 @@ body {
   position: relative;
   z-index: 1;
 }
+h1, p {
+  white-space: pre-wrap;
+  opacity: 0;
+}
 h1 {
   font-size: 2em;
   margin-bottom: 20px;
   min-height: 60px;
-  opacity: 0;
   line-height: 1.4em;
 }
 p {
   font-size: 1.2em;
   margin: 10px 0;
-  min-height: 40px;
-  opacity: 0;
-  line-height: 1.5em;
+  min-height: 60px;
+  line-height: 1.6em;
 }
 .heart {
   position: absolute;
@@ -72,27 +74,20 @@ p {
 
 <script>
 const messages = [
-"Καθε στιγμη μαζι σου ειναι η πιο ομορφη στιγμη της ζωης μου",
-"Η αγαπη σου γεμιζει την καρδια μου με φως και χαρα",
-"Μαζι σου νιωθω πληρης και ευτυχισμενος",
-"Δεν υπαρχει τιποτα πιο ομορφο απο το να σε σκεφτομαι",
-"Η καρδια μου ανηκει σε εσενα για παντα",
-"Ειμαι παντα διπλα σου, οτι κι αν συμβει",
-"Σ αγαπω περισσοτερο καθε μερα",
-"Καθε σου χαμογελο φωτιζει την ψυχη μου",
-"Εισαι ο λογος που ξυπναω με χαμογελο",
-"Η αγαπη μας ειναι το πιο ομορφο ταξιδι",
-"Θελω να μοιραζομαι καθε στιγμη της ζωης μου μαζι σου",
-"Με κανεις να πιστευω στα θαυματα",
-"Σου υποσχομαι παντα να σε στηριζω",
-"Η καρδια μου ειναι δικη σου για παντα"
+"Καθε στιγμη μαζι σου ειναι η πιο ομορφη στιγμη της ζωης μου.\n\nΗ αγαπη σου γεμιζει την καρδια μου με φως και χαρα.",
+"Μαζι σου νιωθω πληρης και ευτυχισμενος.\n\nΔεν υπαρχει τιποτα πιο ομορφο απο το να σε σκεφτομαι.",
+"Η καρδια μου ανηκει σε εσενα για παντα.\n\nΕιμαι παντα διπλα σου, οτι κι αν συμβει.",
+"Σ αγαπω περισσοτερο καθε μερα.\n\nΚαθε σου χαμογελο φωτιζει την ψυχη μου.",
+"Εισαι ο λογος που ξυπναω με χαμογελο.\n\nΗ αγαπη μας ειναι το πιο ομορφο ταξιδι.",
+"Θελω να μοιραζομαι καθε στιγμη της ζωης μου μαζι σου.\n\nΜε κανεις να πιστευω στα θαυματα.",
+"Σου υποσχομαι παντα να σε στηριζω.\n\nΗ καρδια μου ειναι δικη σου για παντα."
 ];
 
 let index = 0
 const messageEl = document.getElementById('message')
 const titleEl = document.getElementById('title')
 
-function typeMessage(element, text, delay = 50) {
+function typeMessage(element, text, delay = 30) {
   element.innerText = ""
   let i = 0
   element.style.opacity = 1
@@ -120,7 +115,7 @@ function showNextMessage() {
 typeMessage(titleEl, messages[0])
 typeMessage(messageEl, messages[0])
 
-setInterval(showNextMessage, 4000)
+setInterval(showNextMessage, 6000)
 
 function createHeart() {
   const heart = document.createElement('div')
@@ -136,7 +131,6 @@ function createHeart() {
   setTimeout(()=>heart.remove(),9000)
 }
 
-// δημιουργούμε καρδιές με κενά για πιο φυσικό αποτέλεσμα
 setInterval(()=>{
   if(Math.random() > 0.2) createHeart()
 }, 250)
