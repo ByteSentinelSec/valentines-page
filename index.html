@@ -32,6 +32,7 @@ h1 {
   font-size: 2em;
   margin-bottom: 20px;
   min-height: 50px;
+  opacity: 0;
   transition: opacity 0.5s ease;
   line-height: 1.4em;
 }
@@ -39,6 +40,7 @@ p {
   font-size: 1.2em;
   margin: 10px 0;
   line-height: 1.5em;
+  opacity: 0;
   transition: opacity 0.5s ease;
 }
 .heart {
@@ -57,8 +59,8 @@ p {
 <body>
 
 <div class="container">
-<h1 id="title">Καθε Στιγμη Μαζι Σου</h1>
-<p id="message">Καθε στιγμη μαζι σου ειναι η πιο ομορφη στιγμη της ζωης μου</p>
+<h1 id="title"></h1>
+<p id="message"></p>
 </div>
 
 <script>
@@ -83,18 +85,33 @@ let index = 0
 const messageEl = document.getElementById('message')
 const titleEl = document.getElementById('title')
 
+function typeMessage(element, text, delay = 50) {
+  element.innerText = ""
+  let i = 0
+  element.style.opacity = 1
+  function type() {
+    if(i < text.length) {
+      element.innerText += text[i]
+      i++
+      setTimeout(type, delay)
+    }
+  }
+  type()
+}
+
 function showNextMessage() {
   index++
   if(index >= messages.length) index = 0
-  messageEl.style.opacity = 0
   titleEl.style.opacity = 0
+  messageEl.style.opacity = 0
   setTimeout(() => {
-    messageEl.innerText = messages[index]
-    titleEl.innerText = messages[index]
-    messageEl.style.opacity = 1
-    titleEl.style.opacity = 1
+    typeMessage(titleEl, messages[index])
+    typeMessage(messageEl, messages[index])
   }, 500)
 }
+
+typeMessage(titleEl, messages[0])
+typeMessage(messageEl, messages[0])
 
 setInterval(showNextMessage, 4000)
 
